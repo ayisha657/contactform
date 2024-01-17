@@ -1,3 +1,38 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $contactName = $_POST["contact_name"];
+    $contactNumber = $_POST["contact_number"];
+    $userName = $_POST["user_name"];
+    $reasonForDeletion = $_POST["reason_for_deletion"];
+
+    // Email parameters
+    $to = "ayishahanna657@gmail.com";
+    $subject = "Form Submission Successful";
+    $message = "Contact Name: $contactName\nContact Number: $contactNumber\nUser Name: $userName\nReason for Deletion: $reasonForDeletion";
+    $headers = "From: ayishahanna657@gmail.com";
+
+    // Send email
+    if (mail($to, $subject, $message, $headers)) {
+        // Display success message
+        echo "Success! The form has been submitted, and an email has been sent.";
+    } else {
+        // Display error message
+        echo "Error sending email.";
+    }
+} else {
+    echo "Invalid request method.";
+}
+?>
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -132,7 +167,7 @@
     </style>
   </head>
   <body>
-    <form action="/" class="decor">
+    <form action="" class="decor" method="POST">
       <div class="form-left-decoration"></div>
       
       <div class="form-right-decoration"></div>
@@ -140,13 +175,13 @@
       <div class="form-inner">
         <img src="./7.jpg" alt="Logo" class="logo">
         <h1>Contact us</h1>
-        <input type="text" placeholder="Contact name">
-        <input type="text" placeholder="Contact number" pattern="[789][0-9]{9}">
-        <input type="text" placeholder="User name">
+        <input type="text" placeholder="Contact name" name="contact_name">
+        <input type="text" placeholder="Contact number" pattern="[789][0-9]{9}" name="contact_number">
+        <input type="text" placeholder="User name" name="user_name" >
 
         
-        <textarea placeholder="Reason for deletion..." rows="5"></textarea>
-        <button type="submit" href="">Submit</button>
+        <textarea placeholder="Reason for deletion..." rows="5" name="reason_for_deletion"></textarea>
+        <button type="submit">Submit</button>
       </div>
     </form>
   </body>
